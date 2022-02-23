@@ -2,6 +2,7 @@ package next.web;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,9 +22,11 @@ public class UpdateUserFormServlet extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    	log.debug("uid : {}", req.getParameter("userId"));
     	User user = DataBase.findUserById(req.getParameter("userId"));
     	log.debug("user : {}", user);
-    	resp.sendRedirect("/user/update");
+    	req.setAttribute("user", user);
+    	RequestDispatcher rd = req.getRequestDispatcher("/user/update.jsp");
+    	rd.forward(req, resp);
     }
-    
 }

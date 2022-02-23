@@ -82,11 +82,10 @@
                 <c:forEach items="${users}" var="user" varStatus="status">
                     <tr>
                         <th scope="row">${status.count}</th>
-                        <td>${user.userId}</td>
+                        <td class="uid ${status.count}">${user.userId}</td>
                         <td>${user.name}</td>
                         <td>${user.email}</td>
-                        <td><a href="#" class="btn btn-success" role="button">수정</a>
-                        </td>
+                        <td><a class="btn btn-success" role="button">수정</a></td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -99,5 +98,29 @@
 <script src="../js/jquery-2.2.0.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/scripts.js"></script>
+
+<!-- script onClickEvent -->
+<script>
+	let btnSuccess = document.querySelectorAll('a.btn.btn-success');
+	[].forEach.call(btnSuccess, function(event){
+		event.addEventListener('click', updateUser, false);
+	});
+	function updateUser(e){
+		//console.log(this.closest('tr').querySelector('td.uid').innerHTML);
+		//console.log(uid);
+		let uid = this.closest('tr').querySelector('td.uid').innerHTML;
+		let form = document.createElement("form");
+		form.setAttribute("method", "Post");
+		form.setAttribute("action", "/user/updateRequest")
+		let input = document.createElement("input");
+		input.setAttribute('name', 'userId');
+		input.setAttribute('value', uid);
+		input.setAttribute('type', "hidden");
+		form.appendChild(input);
+		//console.log(form);
+		document.body.appendChild(form);
+		form.submit();
+	}
+</script>
 </body>
 </html>

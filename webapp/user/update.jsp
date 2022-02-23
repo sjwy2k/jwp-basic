@@ -72,11 +72,11 @@
  <div class="container" id="main">
    <div class="col-md-6 col-md-offset-3">
       <div class="panel panel-default content-main">
-          <c:set var="user" value="${param.user}"  scope="page"/>
           <form name="question" method="post" action="/user/updateProceed">          		
               <div class="form-group">
                   <label for="userId">사용자 아이디</label>
-                  <input class="form-control" id="userId" name="userId" value="${user.userId}" />
+                  <input class="form-control" value="${user.userId}" readonly/>
+                  <input type="hidden" id="userId" name="userId" value="${user.userId}" />
               </div>
               <div class="form-group">
                   <label for="password">비밀번호</label>
