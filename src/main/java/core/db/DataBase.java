@@ -21,4 +21,16 @@ public class DataBase {
     public static Collection<User> findAll() {
         return users.values();
     }
+    
+    public static boolean containsKey(String userId) {
+    	return users.containsKey(userId);
+    }
+    
+    public static boolean updateUser(String userId, User user) {
+    	if(containsKey(userId)) {
+    		users.replace(userId, user);
+    		return true;
+    	}
+    	return false;    	
+    }
 }
